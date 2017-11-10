@@ -1,6 +1,9 @@
  <%= "#{@pl1} vs. #{@pl2} #{@hp2} HP"%><br />
  <br />
  <br />
- <form action="/attack">
+ <form action="/attack" method="post">
    <input type="submit" value="Attack">
  </form>
+ <% if @attack_confirmation %>
+ <%= "#{@attack_confirmation}"%>
+ <% end %>
