@@ -9,7 +9,10 @@ class Player
   end
 
   def reduce_hp
-    @hp -= 10
+    @hp -= rand_attack
   end
 
+  def rand_attack
+    rand(1..30)
+  end
 end
