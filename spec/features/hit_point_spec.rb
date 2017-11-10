@@ -11,7 +11,19 @@ feature 'attack reduces hit points' do
   scenario "attacking player reduces the hit points by ten" do
     sign_in_and_play
     click_button 'Attack'
-    click_button 'Back'
-    expect(page).to have_content "Gabriela vs. Lewis 90 HP"
+    expect(page).to have_content "Lewis was attacked!"
+  end
+
+  scenario "attacking player switches turns" do
+    sign_in_and_play
+    click_button 'Attack'
+    click_button 'Attack'
+    expect(page).to have_content "Gabriela was attacked!"
+  end
+
+  scenario "player two loses" do
+    sign_in_and_play
+    19.times { click_button 'Attack' }
+    expect(page).to have_content "Lewis died!"
   end
 end

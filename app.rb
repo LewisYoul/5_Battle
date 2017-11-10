@@ -16,20 +16,16 @@ class Battle < Sinatra::Base
   end
 
   get "/play" do
-    @pl1 = $game.player1.name
-    @pl2 = $game.player2.name
-    @hp1 = $game.player1.hp
-    @hp2 = $game.player2.hp
+    @pl1, @pl2 = $game.player1.name, $game.player2.name
+    @hp1, @hp2 = $game.player1.hp, $game.player2.hp
     @attack_confirmation = session[:attack_confirmation]
     erb(:play)
   end
 
-  post '/attack' do
-    @pl1 = $game.player1.name
-    @pl2 = $game.player2.name
-    @player = $game.player2
-    $game.attack(@player)
-    session[:attack_confirmation] = "#{@pl2} was attacked!"
+  get '/attack' do
+    @player2 = $game.player2
+    $game.attack
+    session[:attack_confirmation] = $game.attacked_player
     redirect "/play"
   end
   # start the server if ruby file executed directly
